@@ -9,7 +9,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;
 
+import java.lang.reflect.Array;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable{
@@ -19,32 +22,67 @@ public class Controller implements Initializable{
     @FXML private TextField text;
     private GraphicsContext gc;
 
-
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         createPointBtn.setOnMouseClicked(event -> {
             int count = Integer.parseInt(text.getText().toString());
             draw(count);
         });
-
-
     }
 
     void draw(int count){
         gc= canvas.getGraphicsContext2D();
         gc.clearRect(0,0,canvas.getWidth(),canvas.getHeight());
-        gc.setFill(Color.RED);
-        gc.setStroke(Color.BLUE);
+        gc.setFill(Color.BLUE);
+        //
+        Point[] point =new Point[count];
+        //draw point
         for(int a=0; a<count; a++){
+            point[a] =new Point();
 
             double x = (Math.random() * 100000) % canvas.getWidth();
             double y = (Math.random() * 100000) % canvas.getHeight();
-            gc.strokeOval(x,y,10,10);
 
+            point[a].x = (int)x;
+            point[a].y = (int)y;
+
+            //gc.strokeOval(x,y,5,5);
+            gc.fillOval(x,y,5,5);
         }
 
+        //
+        ConvexHull convexhull =new ConvexHull();
+        Point[] outPoint = convexhull.convex_hull(point).clone();
+
+        gc.setStroke(Color.RED);
+        gc.beginPath();
+
+        for(int i=0; i<outPoint.length; i++){
+            if(outPoint[i] != null){
+                gc.lineTo(outPoint[i].x, outPoint[i].y);
+            }
+        }
+        gc.lineTo(outPoint[0].x, outPoint[0].y);
+
+        gc.stroke();
+        gc.closePath();
+        //drawConvexHull(point);
     }
+
+   /* void drawConvexHull(Point[] p){
+        ConvexHull convexhull =new ConvexHull(p);
+        Point[] outPoint = convexhull.convex_hull();
+
+        gc.beginPath();
+        //gc.moveTo(outPoint[0].x, outPoint[0].y );
+        for(int a=0; a<outPoint.length; a++){
+            gc.lineTo(outPoint[a].x, outPoint[a].y);
+        }
+        gc.lineTo(outPoint[0].x, outPoint[0].y );
+        gc.stroke();
+        gc.closePath();
+
+    }*/
 
 
 

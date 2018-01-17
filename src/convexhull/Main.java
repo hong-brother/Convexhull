@@ -22,7 +22,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
 
         Parent root = FXMLLoader.load(getClass().getResource("disign.fxml"));
-        primaryStage.setTitle("Hello World");
+        primaryStage.setTitle("ConvexHull Test");
         primaryStage.setScene(new Scene(root, 800, 500));
         primaryStage.show();
 
