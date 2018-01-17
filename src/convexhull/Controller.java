@@ -50,9 +50,13 @@ public class Controller implements Initializable{
             gc.fillOval(x,y,5,5);
         }
 
-        //
-        ConvexHull convexhull =new ConvexHull();
-        Point[] outPoint = convexhull.convex_hull(point).clone();
+
+        drawConvexHull(point);
+    }
+
+    void drawConvexHull(Point[] p){
+        ConvexHull convexhull =new ConvexHull(p);
+        Point[] outPoint = convexhull.convex_hull();
 
         gc.setStroke(Color.RED);
         gc.beginPath();
@@ -66,23 +70,9 @@ public class Controller implements Initializable{
 
         gc.stroke();
         gc.closePath();
-        //drawConvexHull(point);
+
+
     }
-
-   /* void drawConvexHull(Point[] p){
-        ConvexHull convexhull =new ConvexHull(p);
-        Point[] outPoint = convexhull.convex_hull();
-
-        gc.beginPath();
-        //gc.moveTo(outPoint[0].x, outPoint[0].y );
-        for(int a=0; a<outPoint.length; a++){
-            gc.lineTo(outPoint[a].x, outPoint[a].y);
-        }
-        gc.lineTo(outPoint[0].x, outPoint[0].y );
-        gc.stroke();
-        gc.closePath();
-
-    }*/
 
 
 

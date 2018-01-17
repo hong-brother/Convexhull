@@ -12,23 +12,22 @@ import java.util.Arrays;
  *
  * @author hsnam
  * @version 1.0
- * @see
  */
 public class ConvexHull {
     //http://secmem.tistory.com/554
     //http://119.201.123.184/30stair/convex_hull/convex_hull.php?pname=convex_hull
     // wiki
     //https://en.wikibooks.org/wiki/Algorithm_Implementation/Geometry/Convex_hull/Monotone_chain
-    /*private Point[] point;
+    private Point[] point;
     public ConvexHull(Point[] p){
         this.point = p;
-    }*/
+    }
 
     private static long crossProduct (Point O, Point A, Point B){
         return (A.x - O.x) * (B.y - O.y) - (A.y - O.y) * (B.x - O.x);
     }//백터 외적
 
-    public Point[] convex_hull(Point[] point){
+    public Point[] convex_hull(){
         if(point.length > 1){
             int n = point.length;
             int k = 0;
