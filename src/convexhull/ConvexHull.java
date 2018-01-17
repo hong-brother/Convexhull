@@ -2,6 +2,8 @@ package convexhull;
 
 
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.function.ToDoubleFunction;
 
 /**
  * onvexHull Algorithm - Graham scan
@@ -23,7 +25,7 @@ public class ConvexHull {
         this.point = p;
     }
 
-    private static long crossProduct (Point O, Point A, Point B){
+    private static double crossProduct (Point O, Point A, Point B){
         return (A.x - O.x) * (B.y - O.y) - (A.y - O.y) * (B.x - O.x);
     }//백터 외적
 
@@ -33,8 +35,24 @@ public class ConvexHull {
             int k = 0;
             Point[] H =new Point[2*n];
 
-
-            Arrays.sort(point);
+            Arrays.sort(point, new Comparator<Point>() {
+                @Override
+                public int compare(Point o1, Point o2) {
+                    if(o1.x > o2.x){
+                        return 1;
+                    }else if(o1.x < o2.x){
+                        return -1;
+                    }else {
+                        if(o1.y > o2.y){
+                            return 1;
+                        }else if(o1.y<o2.y){
+                            return -1;
+                        }else {
+                            return 0;
+                        }
+                    }
+                }
+            });
 
             for(int i=0; i<n; ++i){
                 while(k>=2 && crossProduct(H[k-2], H[k-1], point[i]) <= 0)

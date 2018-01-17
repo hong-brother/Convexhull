@@ -23,7 +23,7 @@ public class Controller implements Initializable{
         createPointBtn.setOnMouseClicked(event -> {
             int count = Integer.parseInt(text.getText().toString());
             draw(count);
-        });
+        }); //Button Click Event
     }
 
     void draw(int count){
@@ -36,16 +36,16 @@ public class Controller implements Initializable{
         for(int a=0; a<count; a++){
             point[a] =new Point();
 
+            //Get Random Point
             double x = (Math.random() * 100000) % canvas.getWidth();
             double y = (Math.random() * 100000) % canvas.getHeight();
 
-            point[a].x = (int)x;
-            point[a].y = (int)y;
+            point[a].x = x;
+            point[a].y = y;
 
             //gc.strokeOval(x,y,5,5);
             gc.fillOval(x,y,5,5);
         }
-
 
         drawConvexHull(point);
     }

@@ -2,23 +2,12 @@ package convexhull;
 
 import java.util.Comparator;
 
-public class Point implements  Comparable<Point>{
-    int x, y;
-
-    @Override
-    public int compareTo(Point point) {
-        if(this.x ==point.x){
-            return this.y - point.y;
-        }else{
-            return this.x - point.x;
-        }
-    }
-
+public class Point{
+    double x, y;
 
     public String toString(){
         return "("+x + "," + y+")";
     }
-
 
 }
 
